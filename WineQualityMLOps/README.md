@@ -2,7 +2,7 @@ Steps:
 
 Create new Conda Environment
 ```bash
-conda create -n WneQuality python=3.7 -y
+conda create -n WineQuality python=3.7 -y
 ```
 Activate the Environment WineQuality
 ```bash
