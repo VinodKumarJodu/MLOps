@@ -28,3 +28,10 @@ Add the data to dvc
 ```bash
 dvc add data_given/winequality.csv
 ```
+Add the data to github repository
+```bash
+git add . && git commit -m "Adding Data to guthub"
+git remote add origin https://github.com/VinodKumarJodu/MLOps.git
+git branch -M main
+git push origin main
+```
