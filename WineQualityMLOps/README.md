@@ -4,9 +4,9 @@ Create new Conda Environment
 ```bash
 conda create -n WneQuality python=3.7 -y
 ```
-Activate the Environment WIneQuality
+Activate the Environment WineQuality
 ```bash
-conda activate WineQuaality
+conda activate WineQuality
 ```
 Create requirements.txt file
 Install the requirements.txt
@@ -30,7 +30,7 @@ dvc add data_given/winequality.csv
 ```
 Add the data to github repository
 ```bash
-git add . && git commit -m "Adding Data to guthub"
+git add . && git commit -m "Adding Data to github"
 git remote add origin https://github.com/VinodKumarJodu/MLOps.git
 git branch -M main
 git push origin main
