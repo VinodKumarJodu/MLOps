@@ -16,9 +16,9 @@ import joblib
 import json
 
 def eval_metrics(actual, pred):
-    rmse =  np.sqrt(mean_squared_error(actual, pred))
-    mae =   mean_absolute_error(actual, pred)
-    r2  =   r2_score(actual, pred)
+    rmse =  np.round(np.sqrt(mean_squared_error(actual, pred)),3),
+    mae =   np.round(mean_absolute_error(actual, pred),3),
+    r2  =   np.round(r2_score(actual, pred),3)
     return rmse, mae , r2
 
 def train_and_evaluate(config_path):
