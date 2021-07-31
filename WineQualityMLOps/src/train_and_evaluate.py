@@ -19,7 +19,7 @@ def eval_metrics(actual, pred):
     rmse =  np.round(np.sqrt(mean_squared_error(actual, pred)),3),
     mae =   np.round(mean_absolute_error(actual, pred),3),
     r2  =   np.round(r2_score(actual, pred),3)
-    return rmse, mae , r2
+    return rmse, mae, r2
 
 def train_and_evaluate(config_path):
     config = read_params(config_path)
@@ -47,22 +47,23 @@ def train_and_evaluate(config_path):
                     random_state=random_state
                     )
     lr.fit(train_X, train_y)
-    predict = lr.predict(test_X)
+    y_pred = lr.predict(test_X)
     lr.score(test_X, test_y)
-    (rmse, mae, r2) = eval_metrics(test_y, predict)
+    (rmse, mae, r2) = eval_metrics(test_y, y_pred)
 
-    print(f'RMSE: {rmse}')
-    print(f' MAE: {mae}')
-    print(f'  R2: {r2}')
+    print(f'rmse: {rmse}:.3f')
+    print(f' mae: {mae}:.3f')
+    print(f'  r2: {r2}:.3f')
 
     scores_file  =  config['reports']['scores']
     params_file =  config['reports']['params']
 
     with open(scores_file,'w') as f:
         scores = {
-            'RMSE': rmse,
-            'MAE' : mae,
-            'R2'  : r2
+            'rmse': rmse,
+            'mae': mae,
+            'r2': r2
+
         }
         json.dump(scores, f, indent=4)
 
@@ -77,11 +78,6 @@ def train_and_evaluate(config_path):
     model_path = os.path.join(model_dir,'model.joblib')
 
     joblib.dump(lr, model_path)
-
-    
-
-
-
 
 
 if __name__ == '__main__':
