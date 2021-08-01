@@ -5,10 +5,7 @@
 import os
 import pandas as pd
 import numpy as np
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
-from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.linear_model import ElasticNet
 from get_data import read_params
 import argparse
@@ -16,10 +13,10 @@ import joblib
 import json
 
 def eval_metrics(actual, pred):
-    rmse =  np.round(np.sqrt(mean_squared_error(actual, pred)),3),
-    mae =   np.round(mean_absolute_error(actual, pred),3),
+    rmse =  np.round(np.sqrt(mean_squared_error(actual, pred)),3)
+    mae =   np.round(mean_absolute_error(actual, pred),3)
     r2  =   np.round(r2_score(actual, pred),3)
-    return rmse, mae, r2
+    return (rmse, mae, r2)
 
 def train_and_evaluate(config_path):
     config = read_params(config_path)
@@ -51,19 +48,18 @@ def train_and_evaluate(config_path):
     lr.score(test_X, test_y)
     (rmse, mae, r2) = eval_metrics(test_y, y_pred)
 
-    print(f'rmse: {rmse}:.3f')
-    print(f' mae: {mae}:.3f')
-    print(f'  r2: {r2}:.3f')
+    print(f'RMSE: {rmse}')
+    print(f' MAE: {mae}')
+    print(f'  R2: {r2}')
 
-    scores_file  =  config['reports']['scores']
-    params_file =  config['reports']['params']
+    scores_file  =  config['report']['scores']
+    params_file =  config['report']['params']
 
     with open(scores_file,'w') as f:
         scores = {
-            'rmse': rmse,
-            'mae': mae,
-            'r2': r2
-
+            'RMSE': rmse,
+            'MAE': mae,
+            'R2': r2
         }
         json.dump(scores, f, indent=4)
 
